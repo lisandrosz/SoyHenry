@@ -2,27 +2,19 @@
 
 function BinarioADecimal(num) {
   let acumulador = 0
-  let str = num.toString()
-  for(let i = 0; i < str.length; i++){
-    let valor = Number(str[(str.length - i) - 1])
-    acumulador += valor * (2**i)
+  for(let i = 0; i < num.length; i++){
+    acumulador += num[(num.length - i) - 1] * (2**i)
   }
   return acumulador
 }
 
 function DecimalABinario(num) {
 let arr = [] 
-let str 
-while (true) {
+while (num !== 0) {
   arr.unshift(num % 2)
   num = Math.floor(num / 2)
-  if(num === 1){
-    arr.unshift(1)
-    str = arr.join("")
-    break
-  }
 }
-return str
+return arr.join("")
 }
 
 
