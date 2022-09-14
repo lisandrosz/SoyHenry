@@ -16,7 +16,7 @@ var c = function (a, b, c) {
   console.log(a); // aca se muestra 8
   var f = function (a, b, c) {
     b = a;
-    console.log(b); // aca se muestra a
+    console.log(b); // aca se muestra 8
     b = c;
     var x = 5;
   };
@@ -29,12 +29,12 @@ console.log(x); // aca se muestra 1
 ```
 
 ```javascript
-console.log(bar); // se muestra 1
-console.log(baz); // undefined
+console.log(bar); // undefined
+console.log(baz); // error
 foo();
 function foo() {
-  console.log("Hola!");
-} // Hola!
+  console.log("Hola!"); // Hola!
+}
 var bar = 1;
 baz = 2;
 ```
@@ -84,15 +84,15 @@ console.log(pm); // Franco
 "4" - 2  // 2
 "4px" - 2  // NaN
 7 / 0  // Infinity
-{}[0]
-parseInt("09")
+{}[0] // [0]
+parseInt("09") // 9
 5 && 2 // 2
 2 && 5 // 5
 5 || 0 // 5
 0 || 5 // 5
-[3]+[3]-[10]
-3>2>1 // NaN
-[] == ![]
+[3]+[3]-[10] // 23
+3>2>1 // false
+[] == ![] // true
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
