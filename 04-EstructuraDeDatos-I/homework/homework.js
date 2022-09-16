@@ -58,23 +58,22 @@ Pueden utilizar class o función constructora.
 */
 
 class Queue {
-
   constructor(){
     this.arr = []
   }
-  
-  enqueue(valor) {
-    this.arr.push(valor)
-  }
-  dequeue() {
-    return this.arr.shift()
-  }
-  size() {
-    return this.arr.length
-  }
-
 }
 
+Queue.prototype.enqueue = function(valor) {
+  this.arr.push(valor)
+}
+
+Queue.prototype.dequeue = function() {
+  return this.arr.shift()
+}
+
+Queue.prototype.size = function() {
+  return this.arr.length  
+}
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
