@@ -25,6 +25,29 @@ function nFibonacci(n) {
   return nFibonacci(n - 1) + nFibonacci(n - 2);
 }
 
+/////////////////////EJERCICIOS ADICIONALES/////// 
+
+/* function funcionFactorial(n){
+  let acumulado = 1;
+  for(let i = n; i > 1; i--){
+      acumulado *= i
+  }                                               
+  return console.log(acumulado)
+} */
+
+/* function fibo(n){
+  let arr = []
+  for(let i = 0; i <= n; i++){
+      if(i === 0 ) arr.push(0)
+      else if(i === 1) arr.push(1)
+      else{
+          arr.push(arr[i-1] + arr[i-2])
+      }
+  }
+  return console.log(arr[n])
+} */
+
+//////////////////////////////////////////////////
 /*
 Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde el primer elemento que ingresa es el primero que se quita. Definir los siguientes métodos:
   - enqueue: agrega un valor respetando el orden.
