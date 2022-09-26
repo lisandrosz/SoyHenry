@@ -57,15 +57,20 @@ function buildToDo(todo, index) {
 
   let toDoText = document.createElement("span");
   toDoText.innerHTML = todo.description;
-  toDoText.id = index;
+
+  let checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.id = index;
+  checkbox.addEventListener("click", completeToDo);
+  checkbox.className = "completeCheckbox";
+  toDoShell.appendChild(checkbox);
 
   if (todo.complete) {
     toDoText.className = "completeText";
+    checkbox.checked = true;
   }
 
   toDoShell.appendChild(toDoText);
-
-  toDoText.addEventListener("click", completeToDo);
 
   return toDoShell;
 }
@@ -130,6 +135,10 @@ function addToDo() {
 // Tu código acá:
 let agegar = document.querySelector("#addButton");
 agegar.addEventListener("click", addToDo);
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") addToDo();
+});
 
 // La función completeToDo se va a ejecutar cuando queramos completar un todo
 // [NOTA: Algunas cuestiones a tener en cuenta
