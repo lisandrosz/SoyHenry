@@ -12,6 +12,26 @@
       padding:0 15px;
     }
 
+    .img-header {
+      display: flex;
+      align-items: center;
+      padding-top: 10px;
+      img {
+        border-radius: 20px;
+      }
+
+      @media (max-width: @phone) {
+        img {
+          display: flex;
+          align-items: center;
+          width: 98%;
+          margin: 1%;
+          
+          
+        }
+    }
+    }
+
   }
 
   .music-images {
@@ -25,6 +45,23 @@
       border-radius: 20px;
       height: 100%;
     }
+
+    @media (max-width: @phone) { 
+
+      .tecnologia, .ondas {
+        display: none;
+      }
+
+      .auricular {
+        width: 98%;
+        margin: 1%;
+      }
+
+      .musica-nueva {
+        padding-bottom: 2px;
+      }
+  }
+
   }
 
   .musica-nueva {
@@ -58,7 +95,14 @@
       }
 
       .btn {
+        .registration-button(90px, 35px, @btn-bg-color,@wild-sand)
       }
+
+      .btn:hover {
+        .registration-button(90px, 35px, green, @wild-sand);
+        transform: scale(1.2);
+      }
+      
     }
 
     .actual-img {
@@ -71,5 +115,43 @@
         border-radius: 10px;
       }
     }
+
+    @media (max-width: @phone) { 
+      margin-top: 10px;
+      padding: 0px 0px;
+      display: flex;
+      flex-direction: column-reverse;
+
+      .actual-img {
+        width: 98%;
+        margin: 1%;
+      }
+
+      .actual-text {
+        display: flex;
+        flex-direction: column;
+        width: 99%;
+        padding: 10px;
+        padding-bottom: 30px;
+
+        .btn {
+          .registration-button(97%, 45px, @btn-bg-color,@wild-sand);
+          margin: auto;
+        }
+
+        .btn:hover {
+          .registration-button(97%, 45px, @btn-bg-color,@wild-sand);
+          transform: scale(1);
+        }
+
+
+      }
+    }
+
+      
+
+
   }
 }
+
+

@@ -1,1 +1,15 @@
 // Mixins acá
+.registration-button(@ancho; @alto; @color-fondo; @color-fuente) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: @color-fondo;
+    width: @ancho;
+    height: @alto;
+    border-radius: 5px;
+    color: @color-fuente;
+    font-size: 15px;
+    transition: transform 0.5s;
+}
+
+
