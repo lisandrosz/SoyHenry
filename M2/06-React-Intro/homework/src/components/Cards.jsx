@@ -6,10 +6,10 @@ export default function Cards(props) {
   const ciudades = props.cities;
 
   const Container = styled.div`
-    width: 80%;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 0px 50px 0px 50px;
   `;
 

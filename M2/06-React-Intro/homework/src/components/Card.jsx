@@ -6,6 +6,7 @@ export default function Card(props) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 10px;
     width: 300px;
     height: 195px;
     border: 5px solid #1f4d96;
