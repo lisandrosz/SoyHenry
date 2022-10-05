@@ -1,12 +1,32 @@
-import React from 'react';
+import React from "react";
+import styled from "styled-components";
 
 export default function SearchBar(props) {
-  // acá va tu código
+  const Container = styled.div`
+    font-family: "Roboto Slab", serif;
+  `;
+
+  const Texto = styled.input`
+    margin-right: 25px;
+    border-radius: 5px;
+  `;
+
+  const Boton = styled.button`
+    background-color: green;
+    border-radius: 5px;
+    color: white;
+    border: 1px solid green;
+    transition: transform 0.5s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  `;
+
   return (
-    <div>
-      <input type="text" placeholder = "Buscar..." />
-      <button onClick={props.onSearch}>Agregar</button>
+    <Container>
+      <Texto type="text" placeholder="Buscar..." />
+      <Boton onClick={props.onSearch}>Agregar</Boton>
       <hr />
-    </div>
-  )
-};
+    </Container>
+  );
+}
