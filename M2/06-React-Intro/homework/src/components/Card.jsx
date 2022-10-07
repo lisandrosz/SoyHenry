@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
-  background-color: #f6f2d4;
+  background-color: #a5c9ca;
   flex-direction: column;
   align-items: center;
   margin: 10px;
   width: 300px;
   height: 195px;
-  border: 5px solid #5584ac;
+  border: 5px solid #395b64;
   border-radius: 5px;
   font-family: "Roboto Slab", serif;
   animation: aparecer 1s ease;
@@ -44,16 +45,16 @@ const Tittle = styled.h4`
   font-size: 25px;
   font-weight: 600;
   padding-top: 5px;
-  color: #f6f2d4;
+  color: #fff7e9;
   width: 300px;
 `;
 
 const Boton = styled.button`
-  background-color: red;
+  background-color: #ff1e00;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  color: #f6f2d4;
+  color: #fff7e9;
   width: 1.5em;
   height: 1.5em;
   border-radius: 4px;
@@ -64,7 +65,7 @@ const Boton = styled.button`
 `;
 
 const BotonContainer = styled.div`
-  background-color: #5584ac;
+  background-color: #395b64;
   display: flex;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -83,7 +84,9 @@ export default function Card(props) {
   return (
     <Container>
       <BotonContainer>
-        <Tittle>{props.name}</Tittle>
+        <Link to={`/ciudad/${props.id}`}>
+          <Tittle>{props.name}</Tittle>
+        </Link>
         <Boton onClick={() => props.onClose(props.id)}>
           <span>x</span>
         </Boton>
