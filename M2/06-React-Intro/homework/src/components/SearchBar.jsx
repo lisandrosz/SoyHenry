@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -34,17 +35,14 @@ export default function SearchBar({ onSearch }) {
   };
 
   const clickButton = (event) => {
-    console.log(event);
-
     if (event.type === "click" || event.key === "Enter") {
       const apiKey = "698aaf398dc2de525ed31b699aa3a4c7";
       const url = `http://api.openweathermap.org/data/2.5/weather?q=${textState}&appid=${apiKey}&units=metric`;
-      fetch(url)
-        .then((respuesta) => respuesta.json())
-        .then((json) => {
-          onSearch(json);
-        })
-        .catch(() => alert("Error.. ciudad no encontrada"));
+
+      axios
+        .get(url)
+        .then((response) => onSearch(response.data))
+        .catch(() => alert("Ciudad no encontrada"));
     }
   };
 

@@ -35,7 +35,7 @@ const Tittle = styled.h4`
   padding-top: 5px;
   padding-bottom: 5px;
   color: #fff7e9;
-  width: fit-content;
+  width: 300px;
   background-color: #395b64;
 `;
 
