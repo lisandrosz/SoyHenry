@@ -30,15 +30,23 @@ const $Promise = function (executor) {
       this._value = data;
       this._state = "rejected";
     }
+    if (this._handlerGroups.length > 0) {
+      for (let i = 1; i <= this._handlerGroups.length; i++) {
+        this._callHandlers(i);
+      }
+    }
   };
   this._handlerGroups = [];
   this._callHandlers = (num) => {
     this._state === "fulfilled"
       ? this._handlerGroups[num - 1].successCb(this._value)
       : null;
-    this._state === "rejected"
-      ? this._handlerGroups[num - 1].errorCb(this._value)
-      : null;
+
+    if (this._state === "rejected") {
+      if (typeof this._handlerGroups[num - 1].errorCb === "function") {
+        this._handlerGroups[num - 1].errorCb(this._value);
+      }
+    }
   };
 
   this.then = (cb1, cb2) => {
