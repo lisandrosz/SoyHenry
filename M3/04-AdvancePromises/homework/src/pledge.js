@@ -18,6 +18,12 @@ const $Promise = function (executor) {
       this._value = data;
       this._state = "fulfilled";
     }
+
+    if (this._handlerGroups.length > 0) {
+      for (let i = 1; i <= this._handlerGroups.length; i++) {
+        this._callHandlers(i);
+      }
+    }
   };
   this._internalReject = (data) => {
     if (this._state === "pending") {
@@ -25,6 +31,24 @@ const $Promise = function (executor) {
       this._state = "rejected";
     }
   };
+  this._handlerGroups = [];
+  this._callHandlers = (num) => {
+    this._state === "fulfilled"
+      ? this._handlerGroups[num - 1].successCb(this._value)
+      : null;
+    this._state === "rejected"
+      ? this._handlerGroups[num - 1].errorCb(this._value)
+      : null;
+  };
+
+  this.then = (cb1, cb2) => {
+    this._handlerGroups.push({
+      successCb: typeof cb1 === "function" ? cb1 : false,
+      errorCb: typeof cb2 === "function" ? cb2 : false,
+    });
+    this._callHandlers(this._handlerGroups.length);
+  };
+
   executor(this._internalResolve, this._internalReject);
 };
 
