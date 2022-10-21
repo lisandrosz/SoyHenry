@@ -139,7 +139,7 @@ Capítulo 3: Completando los Handlers: Rejection & Catch
 
       // Opcional pero recomendable garbage collection
 
-      xit("descarta handlers que no son más necesarios", function () {
+      it("descarta handlers que no son más necesarios", function () {
         promiseForThing._internalResolve({ animal: "chipmunk" });
         expect(promiseForThing._handlerGroups).toEqual([]);
       });
@@ -160,7 +160,7 @@ Capítulo 3: Completando los Handlers: Rejection & Catch
       console.log(reason);
     }
 
-    xit("adjunta la función pasada como un error handler", function () {
+    it("adjunta la función pasada como un error handler", function () {
       promise.catch(myFunc);
       expect(promise.then).toHaveBeenCalledWith(null, myFunc);
     });
@@ -171,7 +171,7 @@ Capítulo 3: Completando los Handlers: Rejection & Catch
     // que retornar aquí y arreglar `.catch` - esta vez, tomando los specs
     // del Cap 4 en cuenta.
 
-    xit("devuelve lo mismo que .then devolvería", function () {
+    it("devuelve lo mismo que .then devolvería", function () {
       var catchReturn = promise.catch(myFunc);
       var thenReturn = promise.then(null, myFunc);
       [catchReturn, thenReturn].forEach(sanitize);

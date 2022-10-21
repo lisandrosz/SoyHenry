@@ -24,6 +24,7 @@ const $Promise = function (executor) {
         this._callHandlers(i);
       }
     }
+    this._handlerGroups = [];
   };
   this._internalReject = (data) => {
     if (this._state === "pending") {
@@ -35,6 +36,7 @@ const $Promise = function (executor) {
         this._callHandlers(i);
       }
     }
+    this._handlerGroups = [];
   };
   this._handlerGroups = [];
   this._callHandlers = (num) => {
@@ -55,6 +57,10 @@ const $Promise = function (executor) {
       errorCb: typeof cb2 === "function" ? cb2 : false,
     });
     this._callHandlers(this._handlerGroups.length);
+  };
+
+  this.catch = (funcion) => {
+    this.then(null, funcion);
   };
 
   executor(this._internalResolve, this._internalReject);
