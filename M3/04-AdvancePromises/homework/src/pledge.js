@@ -4,8 +4,6 @@ Promises Workshop: construye la libreria de ES6 promises, pledge.js
 ----------------------------------------------------------------*/
 // // TU CÓDIGO AQUÍ:
 
-const executor = function (resolve, reject) {};
-
 const $Promise = function (executor) {
   if (typeof executor !== "function") {
     throw new TypeError("executor is not a function");
@@ -24,6 +22,7 @@ const $Promise = function (executor) {
         this._callHandlers(i);
       }
     }
+
     this._handlerGroups = [];
   };
   this._internalReject = (data) => {
@@ -40,13 +39,56 @@ const $Promise = function (executor) {
   };
   this._handlerGroups = [];
   this._callHandlers = (num) => {
-    this._state === "fulfilled"
-      ? this._handlerGroups[num - 1].successCb(this._value)
-      : null;
+    if (this._state === "fulfilled") {
+      let handler = this._handlerGroups[num - 1];
+      if (handler.successCb) {
+        try {
+          let result = handler.successCb(this._value);
+
+          if (result instanceof $Promise) {
+            result.then(
+              (value) => {
+                handler.downstreamPromise._internalResolve(value);
+              },
+              (error) => {
+                handler.downstreamPromise._internalReject(error);
+              }
+            );
+          } else {
+            handler.downstreamPromise._internalResolve(result);
+          }
+        } catch (error) {
+          handler.downstreamPromise._internalReject(error);
+        }
+      } else {
+        handler.downstreamPromise._internalResolve(this._value);
+      }
+    }
 
     if (this._state === "rejected") {
-      if (typeof this._handlerGroups[num - 1].errorCb === "function") {
-        this._handlerGroups[num - 1].errorCb(this._value);
+      let handler = this._handlerGroups[num - 1];
+      if (handler.errorCb) {
+        if (typeof handler.errorCb === "function") {
+          try {
+            let result = handler.errorCb(this._value);
+            if (result instanceof $Promise) {
+              result.then(
+                (value) => {
+                  handler.downstreamPromise._internalResolve(value);
+                },
+                (error) => {
+                  handler.downstreamPromise._internalReject(error);
+                }
+              );
+            } else {
+              handler.downstreamPromise._internalResolve(result);
+            }
+          } catch (error) {
+            handler.downstreamPromise._internalReject(error);
+          }
+        }
+      } else {
+        handler.downstreamPromise._internalReject(this._value);
       }
     }
   };
@@ -55,12 +97,15 @@ const $Promise = function (executor) {
     this._handlerGroups.push({
       successCb: typeof cb1 === "function" ? cb1 : false,
       errorCb: typeof cb2 === "function" ? cb2 : false,
+      downstreamPromise: new $Promise(function () {}),
     });
     this._callHandlers(this._handlerGroups.length);
+    return this._handlerGroups[this._handlerGroups.length - 1]
+      .downstreamPromise;
   };
 
   this.catch = (funcion) => {
-    this.then(null, funcion);
+    return this.then(null, funcion);
   };
 
   executor(this._internalResolve, this._internalReject);
@@ -68,6 +113,7 @@ const $Promise = function (executor) {
 
 module.exports = $Promise;
 /*-------------------------------------------------------
+
 El spec fue diseñado para funcionar con Test'Em, por lo tanto no necesitamos
 realmente usar module.exports. Pero aquí está para referencia:
 
