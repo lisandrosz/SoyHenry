@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -46,6 +46,7 @@ const SubContainer2 = styled.div`
   margin-top: 2px;
   width: fit-content;
 `;
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 export default function NavBar({ onSearch }) {
