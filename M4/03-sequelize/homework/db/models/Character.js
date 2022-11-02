@@ -1,7 +1,51 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
-  sequelize.define('Character', {
-
-  })
-}
+module.exports = (sequelize) => {
+  sequelize.define(
+    "Character",
+    {
+      code: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false,
+        validate: {
+          len: [0, 5],
+        },
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      age: {
+        type: DataTypes.INTEGER,
+      },
+      race: {
+        type: DataTypes.ENUM(
+          "Human",
+          "Elf",
+          "Machine",
+          "Demon",
+          "Animal",
+          "Other"
+        ),
+        defaultValue: "Other",
+      },
+      hp: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      mana: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      date_added: {
+        type: DataTypes.DATEONLY,
+        defaultValue: Date(),
+      },
+    },
+    {
+      timestamps: false,
+    }
+  );
+};
