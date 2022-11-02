@@ -5,6 +5,7 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: "name_mana_cost",
     },
     description: {
       type: DataTypes.TEXT,
@@ -12,6 +13,7 @@ module.exports = (sequelize) => {
     mana_cost: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      unique: "name_mana_cost",
     },
   });
 };
