@@ -15,6 +15,7 @@ var c = function (a, b, c) {
   console.log(x); // aca se muestra 10
   console.log(a); // aca se muestra 8
   var f = function (a, b, c) {
+    asdasdads;
     b = a;
     console.log(b); // aca se muestra 8
     b = c;
