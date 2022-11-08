@@ -12,7 +12,7 @@ var a = 5;
 var b = 10;
 var c = function (a, b, c) {
   var x = 10;
-  console.log(x); // aca se muestra 10
+  console.log(x); // aca se muestra 10asdasd
   console.log(a); // aca se muestra 8
   var f = function (a, b, c) {
     asdasdads;
